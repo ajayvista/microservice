@@ -1,3 +1,4 @@
+
 Microservices
 =============
 
@@ -170,46 +171,45 @@ Microservices(distrbuted piece of Software) Design Principles
 	 		- Server side discovery
 
 #### Monitoring Tech
-> Centralised tools
-Nagios
-PRTG
-Load balancers
-New Relic
+##### Centralised tools
+	-	Nagios
+	-	PRTG
+	-	Load balancers
+	-	New Relic
 
-> Desired features
-Metrics across servers
-Automatic or minimal configuration
-Client lirarries to send metrics
-Test transactions support
-Alert
+##### Desired features
+	-	Metrics across servers
+	-	Automatic or minimal configuration
+	-	Client Libraries to send metrics
+	-	Test transactions support
+	-	Alert
 
-> Network monitoring
-> Standarise Monitoring
-	- Central tool
-	- Prevonfigured virtual machines or containers
-> Real time monitoring
+##### Network monitoring
+	- Standarise Monitoring
+		- Central tool
+		- Prevonfigured virtual machines or containers
+	- Real time monitoring
 
 
 #### Logging Tech
-> Portal for centralised logging data
+##### Portal for centralised logging data
 	-	Elastic log
 	-	Log Stash
 	-	Splunk
 	-	Kibana
 	-	Graphite
 
-> Client logging libraries
+##### Client logging libraries
 	- 	Structured logging
 	- 	Logging across servers
 	-	Automatic or minimal configuration
 	- 	Correlation\Context ID for transaction
-> Standarise Logging
+##### Standarise Logging
 	-	Central tool
 	-	Template for client library
 
 #### Performance
 	-	Scaling number of instances of service, adding resource to existing service
-
 	-	Automated or on-demand
 	-	PAAS auto scaling options
 	-	Virtualization and containers
@@ -369,15 +369,13 @@ Scoping microservice using bounded context
 
 ###  Domain driven design (a design that models real world domains)
 	- Domain consists of multiple bounded context (describe functions assocaited with-in domain), each bounded ccontext represents a domain function - a specific responsibility enforced by an explicit boundry
-
-	- encourge to loose coupling and high cohesion with-in boundry
-
+	- Encourge to loose coupling and high cohesion with-in boundry
 	- Starts of as a core domain concept
 	- Internal models (supporting concepts/internal language)
-	- Each bounded context has an explicit interface to interact with other bounded context, independed from other bounded context, internal models separate from external models  and internal change in models should not force external bounded context.
-		- belong to a teeam
-		- own repository and data store
-		- contracts
+	- Each bounded context has an explicit interface to interact with other bounded context, independed from other bounded context, internal models separate from external models and internal change in models should not force external bounded context.
+		- Belong to a team
+		- Own repository and data store
+		- Contracts
 		- Logical bounded context
 		- Out of context
 		- Ubiquitous (natural core language) Language (define key terms that domain expert and enginer uses to communicate)
@@ -388,45 +386,43 @@ Scoping microservice using bounded context
 		- Removing out of scope concepts
 		- Single concepts indicate integration
 			- integration with other bounded context
-
-	- Identifying the core
-		- 
+	- Identifying the core 
 	- Aggregation
 		- Addition to bounded context
 		- Combining services
 		- Used in addition to decomposing
 		- Reason for Reporting, Enhanced functionality, Usability for clients, Performane - when to decompose or aggregate		
 
-	Unbounded approch 
-		- overlaping language in the boundry
+	- Unbounded approch 
+		- Overlaping language in the boundry
 
 
 How to architect Asynchronous Microservics
 ==============================================
 
-> Event Based (Client <-.-> Message Broker <-.-> Service)
-	. Competing workers pattern
-	. Fanout pattern
-	. Options
-		> Transaction/action as an event
-		> Messages using message brokers
-		> Decouples client and service
-		> Queuing Pattern
-			> Competing workers Pattern
+## Event Based (Client <-.-> Message Broker <-.-> Service)
+	- Competing workers pattern
+	- Fanout pattern
+	- Options
+		- Transaction/action as an event
+		- Messages using message brokers
+		- Decouples client and service
+		- Queuing Pattern
+			- Competing workers Pattern
 				- message queue listened by multiple service, each service competing for a message
-			> Fanout Pattern
+			- Fanout Pattern
 				- Each service listen by each service (message distributed to all other services, multiple task on same message)
  
-> Async API call
+## Async API call
 	. Request acknowledge with callback
-		> Incoming request with callback info.
-		> Validate request
-		> Return request accept status code
-		> Start as background task
-		> Return acknowledgement (return status using callback)
+		- Incoming request with callback info.
+		- Validate request
+		- Return request accept status code
+		- Start as background task
+		- Return acknowledgement (return status using callback)
 
 
-> Other Options
+### Other Options
 	- Hangfire (Dashboard)
 	- 	
 
@@ -436,16 +432,16 @@ Architectural Patterns for Microservices
 
 ###	Microservices principles
 
-> Independent Deployment
-> Technology Agonstic
-> Loosely Coupled
-> Independent Changable
-> Stateless API
-> Support and honor contract 	
+- Independent Deployment
+- Technology Agonstic
+- Loosely Coupled
+- Independent Changable
+- Stateless API
+- Support and honor contract 	
 
 
-Architectrual Sytle
-> Pragamatic REST (Extended unofficial version of REST)
+### Architectrual Sytle
+#### Pragamatic REST (Extended unofficial version of REST)
 	-- Not all about resource CRUD
 	-- Action\Task based endpoints
 	-- Verbs instead of nouns (ex: /api/offers/expirevouchers, noun: /api/offers)
@@ -454,12 +450,17 @@ Architectrual Sytle
 	-- Callback address for output
 	-- Http Status code	
 
-> HATEOS (True REST)
-> SOAP
-> RPC
+#### HATEOS (True REST)
+#### SOAP
+#### RPC
+
+
+#### Common design patterns
 
 >Facade Pattern (a single interface to sub systems, api request honured by facade)
+
 >Proxy Pattern (a placeholder of another object, used to control access to other object, other object could be external api, doesn't contain business logic instead provide wrapper around Transformation, Validation, Security or Simplification)
+
 >Stateless service pattern (not keeping state within service/server end, client maintain state, client send as request if required to process, benefits scalability, performance and availibility)
 
 How to compose microservics?
@@ -467,14 +468,14 @@ How to compose microservics?
 
 ###	Composition Patterns
 
-	> Broker - Message brokers 
-	> Aggregate Pattern-A service communicate with other servicee and aggregate response and return to client 
-	> Chained Pattern (One service call another service, make it synchronous call)
-	> Proxy Pattern (API Gateway)
-	> Branch Pattern (branching and grouping services and returing response), could be one half is asynchronous and another is chained
+	- Broker - Message brokers 
+	- Aggregate Pattern-A service communicate with other servicee and aggregate response and return to client 
+	- Chained Pattern (One service call another service, make it synchronous call)
+	- Proxy Pattern (API Gateway)
+	- Branch Pattern (branching and grouping services and returing response), could be one half is asynchronous and another is chained
 
 ###	How to achieve data consistency(ACID) across microservices.
-	> Two phase commit pattern (ACID is mandatory,CAP Theorem: Choosing consistency)
+	- Two phase commit pattern (ACID is mandatory, CAP Theorem: Choosing consistency)
 		- Pattern for distributed architecture
 			- Transaction manager manages transaction
 		- Prepare phase
@@ -484,17 +485,17 @@ How to compose microservics?
 			- Issues a commit on all yes votes
 			- Issues a rollback on any no vote
 		- Caveats
-			> Reliane on a transaction manager
-			> No voting response
-			> Commit failure after successful vote
-			> Pending transactions lock resources
-			> Avoid custom implementation
-			> Has scaling out issues
-			> Reduce througput
-			> Anti-pattern
-	> Saga Pattern (Trading atomicity over availability and consistency)
-			> Split transaction into many requests
-			> Track each request (Saga log, Saga execution coordinator (SEC)
+			- Reliane on a transaction manager
+			- No voting response
+			- Commit failure after successful vote
+			- Pending transactions lock resources
+			- Avoid custom implementation
+			- Has scaling out issues
+			- Reduce througput
+			- Anti-pattern
+	- Saga Pattern (Trading atomicity over availability and consistency)
+			- Split transaction into many requests
+			- Track each request (Saga log, Saga execution coordinator (SEC)
 			.--SEC--
 				. Interprets and writes to the log
 				. Sends out saga requests
@@ -503,24 +504,24 @@ How to compose microservics?
 				. Send on failure for all completed requets
 				. Idempotent (easy with REST), each one sent one or many times
 
-			> Failure management pattern
-			> Compensate requets
+			- Failure management pattern
+			- Compensate requets
 		- Caveats
 			> ACID: Compromise atomocity 
-	> Eventual consistency pattern (Compromise ACID, Choosing availability)
-			> Data will eventually be consistent based on BASE model
-			> BASE vs ACID model
-			> Avoid resource locking
-			> Ideal for long running tasks
-			> Prepared of inconsistency
-			> Race conditions
-			> Data Replication
-			> Event based
+	- Eventual consistency pattern (Compromise ACID, Choosing availability)
+			- Data will eventually be consistent based on BASE model
+			- BASE vs ACID model
+			- Avoid resource locking
+			- Ideal for long running tasks
+			- Prepared of inconsistency
+			- Race conditions
+			- Data Replication
+			- Event based
 
 ### Centralize access to microservices using an API Gateway
  	Why and how we need centralize access?
- 	> API Gateway - why ?
- 		- Since microservice is distributed architeture wheere it comes with lots of feature and benefits, there are some complexivty comes inheritnly that we can resolve with some pattern and practices.. some complexitity like
+ 	- API Gateway - why ?
+ 		- Since microservice is distributed architeture where it comes with lots of feature and benefits, there are some complexivty comes inheritnly that we can resolve with some pattern and practices.. some complexitity like
  		- Distributed functionality
  		- Distributed data
  		- Distributed security
@@ -530,7 +531,7 @@ How to compose microservics?
  			- Managing security
  		- Complicated customer experience
  			- APIs as a product
- 	> API Gateway - Component to access APIs
+ 	- API Gateway - Component to access APIs
  		- An API iteself
  		- Restful API
  		- Security/Authentication - take away complexity from backend complexity
@@ -540,20 +541,19 @@ How to compose microservics?
  		- Circuit Breaker/RetryPolicy/ Resilence/Caching/Logging and Monitoring
  		- Service Discovering/Reegistry
  		- Mask versioning /compaitability/migrating traffic in gradulway (control load on new release/ip control/block/restriction)
- 		- 
- 	Open source - api gateway -> Konghq.com
+ 		- Open source - api gateway -> Konghq.com
 
 ### Split monolitihic database across microservices
-	> Monolithic database
+	- Monolithic database
 		- Provide ability to share daya easily
-	> Why we should avoid
+	- Why we should avoid
 		- independently change
 		- Independently deploy
 		- Tight coupling
 		- Harder to scaleout
 		- Performance bottelneck
 
-	> Microdatabase how?
+	- Microdatabase how?
 		- Avoid data first design (Traditional approch, anti-pattern for microservices, Anemic CRUD based services, exposing internal data structures)	
 		- Incorporate existing assets as service
 		- Put legacy assets behind a facade and connect it to the core application 	
@@ -754,20 +754,14 @@ How to compose microservics?
 	-	
 
 ### Define and document microservice contract
-	> Consumer driven contract, taken consumer application as requirement based on types of request to fulfill the use case., Documented as computer driven language so that unit test and validate contract between both parties.
-	
-	> Resource based microservice, restful style where every endpoint considered as managing resource using http verb.
-
-	> Action based microservice - Restful style microservice using actions(starting with verb on top of resource). ex: myapi.org/orders/cancelorder/{ordeerid}
-
-	> Interface defination langugage -  way to document microservice contracts (before or after)
-		. Computer readable format
-		. Platform and language independent
-		. Tools - generate test suits, mock APIs and documentation.
-	> Swagger - based on open api specification, it's implementation of interface defination langugage
-
-
-
+-	Consumer driven contract, taken consumer application as requirement based on types of request to fulfill the use case., Documented as computer driven language so that unit test and validate contract between both parties.
+-	Resource based microservice, restful style where every endpoint considered as managing resource using http verb.
+-	Action based microservice - Restful style microservice using actions(starting with verb on top of resource). ex: myapi.org/orders/cancelorder/{ordeerid}
+-	Interface defination langugage -  way to document microservice contracts (before or after)
+--	Computer readable format
+--	Platform and language independent
+--	Tools - generate test suits, mock APIs and documentation.
+-- Swagger - based on open api specification, it's implementation of interface defination langugage
 
 ### Implement micro services centralized logging
 
@@ -803,20 +797,22 @@ How to compose microservics?
 			> In-line with data retention policies
 
 ### Reporting from distributed microservice data
-	Solution options for central reporting
-	> Reporting service - calls other services and pull required data and store into local db for further reporting or process
-	
-	> Data push application - data push application work with each service and push to common db after some transformation for reporting, ensuring right data picked and converted into right format and pushed to right location. (converting transaction data into reporting data)
 
-	> Reporting event subscriber - send reporting data to reporting system as series of event, microservice raises change event to message system and reporting service listen and store data into central reporting system (event sourcing) -> transform the data -> save into central reporting database.
+#### Solution options for central reporting
 
-	> Reporting events via Gateway
-	- Client App/Api => API Gateway => Message Broker => Data Push App=> Event Sourcing=> Reporting Service => Central reporting database
+>**Reporting service** - Calls other services and pull required data and store into local db for further reporting or process
 
- 	> Using backup imports for reporting
+> **Data push application** - Data push application work with each service and push to common db after some transformation for reporting, ensuring right data picked and converted into right format and pushed to right location. (converting transaction data into reporting data)
+
+> **Reporting event subscriber** - send reporting data to reporting system as series of event, microservice raises change event to message system and reporting service listen and store data into central reporting system (event sourcing) -> transform the data -> save into central reporting database.
+
+> **Reporting events via Gateway**
+	> -- Client App/Api => API Gateway => Message Broker => Data Push App=> Event Sourcing=> Reporting Service => Central reporting database
+
+ > **Using backup imports for reporting**
  	- Backup database -> data import/jobs/app -> Reporting service -> central reporting database
 
- 	> ETL and Data-warehouses
+ > **ETL and Data-warehouses**
  	Orders+Customer => ETL Process (Extract => Transform => Load into datawarehouse) => Reporting service => central database
 
 ### Cloud based APIs
@@ -929,65 +925,65 @@ How to compose microservics?
 
 
 ###	Monitoring Microservices
-	> Why the need to monitoring
-		. Microservices complexity
-		. High availability is a requirement
-	> Causes of microservices outages
-		. Deployment Issues
-		. Delayed and long repair
-		. Downstream dependency issues
-	> Monitoring is the proactive solutionn
-		. Know the state of all components
-		. Know the state at eveery stage
-		. Collect all statistics using metrics
-	...Monitor Key Metrics...
-	> Host and infrastrucres metrics => Monitoring Dashboard
-		. State of hosts and infrastructure
-			(ammount of resourcee available or consumed, state of resource like CPU, bandwidth, memory , disk)
-		. State affects microservices
-	> Monitor microservice metrics
-		. Availability (health, response rate, average request/response/ success or failure of endpoints metrics)
-		. Metrics around Errors, exception and timeouts
-		.Endpoints exposing metrics data
-		.Health of dependencies (metrics - central monitoring system of third party APIs)
-		.Metrics at different stages
-	>Business Metrics
-		. Hidden issues and failure
-		. Sudden dip or change in end user behaviour=> must feed into metrics or dashboard
-		. Business metrics/stats around business
-	>Monitor SLA metrics at all levels (Without them, you cannot know if your system is reliable, available or even useful)
-		. Service level (throguput and uptime)
-		. Service endpoint level (integration points)
-		. Concurrent clients
-		. Average response times
-		. Impact of dependencies on SLAs
+
+	- Why the need to monitoring
+		-- Microservices complexity
+		-- High availability is a requirement
+	- Causes of microservices outages
+		-- Deployment Issues
+		-- Delayed and long repair
+		-- Downstream dependency issues
+	- Monitoring is the proactive solutionn
+		-- Know the state of all components
+		-- Know the state at eveery stage
+		-- Collect all statistics using metrics
+	- Monitor Key Metrics
+		-- Host and infrastrucres metrics => Monitoring Dashboard
+		-- State of hosts and infrastructure
+			(ammount of resourcee available or consumed, state of resource like 	CPU, bandwidth, memory , disk)
+		-- State affects microservices
+	- Monitor microservice metrics
+		-- Availability (health, response rate, average request/response/ success or failure of endpoints metrics)
+		-- Metrics around Errors, exception and timeouts
+		-- Endpoints exposing metrics data
+		-- Health of dependencies (metrics - central monitoring system of third party APIs)
+		-- Metrics at different stages
+	- Business Metrics
+		-- Hidden issues and failure
+		-- Sudden dip or change in end user behaviour=> must feed into metrics or dashboard
+		-- Business metrics/stats around business
+	- Monitor SLA metrics at all levels (Without them, you cannot know if your system is reliable, available or even useful)
+		- Service level (throguput and uptime)
+		- Service endpoint level (integration points)
+		- Concurrent clients
+		- Average response times
+		- Impact of dependencies on SLAs
 			- Monitor dependencies
 			- Actionable alerts to fix SLA issues		
 			- Communicate SLA issues early
-	>Monitoring Dashboards and Alerting 
-		. Display and collect metrics
-		. Real-time
-		. Centralized, accessible and standardized
-		. Good dashboard-help into decision, showing alert associated with the metrics, and same can be used for testing and monitoring lower enviorment. - would be used tp correlate mmetrics to events in the system.
-		. Bad dashboard - hard to interpret data
-		. Alert - if significant change in metrics, up or down or passed configured threshold.
-		. Alert - Configurable
-		. Actionable - alerting (avoid non-actionable alert, alert should not for information purpose, alert should link document or url to solve/helping this issue or next step, and metrics link of monitoring dashboard snf used for threashold configuration (historical data, use for performance testing and load testing, expected trafffic for normal thresholds or larger than expecte traffic) .. help engineer to resolve problem
-
+	- Monitoring Dashboards and Alerting 
+		- Display and collect metrics
+		- Real-time
+		- Centralized, accessible and standardized
+		- Good dashboard-help into decision, showing alert associated with the metrics, and same can be used for testing and monitoring lower enviorment. - would be used tp correlate mmetrics to events in the system.
+		- Bad dashboard - hard to interpret data
+		- Alert - if significant change in metrics, up or down or passed configured threshold.
+		- Alert - Configurable
+		- Actionable - alerting (avoid non-actionable alert, alert should not for information purpose, alert should link document or url to solve/helping this issue or next step, and metrics link of monitoring dashboard snf used for threashold configuration (historical data, use for performance testing and load testing, expected trafffic for normal thresholds or larger than expecte traffic) .. help engineer to resolve problem
 			- Normal state threshold
 			- Warning state threshold (prevent outages)
 			- Critical state threshold
-	> Worth reading SRE (site reliability engineering)
-		> Service-Level Objective (SLO)
-			..prerequisite to success is availability
-			..set a precise numerical target for system availability
-			..Every service should have an availability SLO
-			..keep servers at the right availability level and move the load where its most needed
-		> Service-Level Agreement (SLA)
-			..An SLA normally involves a promise to someone using your service that its availability
-		> Service-Level Indicator (SLI)
-			..the frequency of successful probes of our system. 
-	> Monitoring Tools
+	- Worth reading SRE (site reliability engineering)
+		- Service-Level Objective (SLO)
+			- Prerequisite to success is availability
+			- Set a precise numerical target for system availability
+			- Every service should have an availability SLO
+			- Keep servers at the right availability level and move the load where its most needed
+		- Service-Level Agreement (SLA)
+			- An SLA normally involves a promise to someone using your service that its availability
+		- Service-Level Indicator (SLI)
+			- The frequency of successful probes of our system. 
+	- Monitoring Tools
 		. StatsD
 		. Graphite
 		. New Relic
@@ -997,31 +993,41 @@ How to compose microservics?
 Data Management Patterns for Microservices
 ==========================================
 
-> Database Per Service
-In this pattern, each microservice manages its own data. What this implies is that no other microservice can access that data directly. Communication or exchange of data can only happen using a set of well-defined APIs. The success of this pattern hinges on effectively defining the bounded contexts in your application. For a new application or system, it is easier to do so. But for large and existing monolithic systems, it is troublesome.
+**Database Per Service**
+- In this pattern, each microservice manages its own data. What this implies is that no other microservice can access that data directly. 
+- Communication or exchange of data can only happen using a set of well-defined APIs. 
+- The success of this pattern hinges on effectively defining the bounded contexts in your application. For a new application or system, it is easier to do so. But for large and existing monolithic systems, it is troublesome.
 
->Shared Database
-Shared database could be a viable option if the challenges surrounding Database Per Service become too tough to handle for your team.
+**Shared Database**
 
->Saga Pattern
+- Shared database could be a viable option if the challenges surrounding Database Per Service become too tough to handle for your team.
+
+**Saga Pattern**
+
 A Saga is basically a sequence of local transactions. For every transaction performed within a Saga, the service performing the transaction publishes an event. The subsequent transaction is triggered based on the output of the previous transaction. And if one of the transactions in this chain fails, the Saga executes a series of compensating transactions to undo the impact of all the previous transactions.
 
->API Composition
+**API Composition**
 In this pattern, an API Composer invokes other microservices in the required order. And after fetching the results it performs an in-memory join of the data before providing it to the consumer.
 
->CQRS
+**CQRS**
 
 An application listens to domain events from other microservices and updates the view or query database. You can serve complex aggregation queries from this database. You could optimize the performance and scale up the query microservices accordingly.
 
->Event Sourcing
+**Event Sourcing**
+
 In event sourcing, you store the state of the entity or the aggregate as a sequence of state changing events. A new event is created whenever there is an update or an insert. The event store is used to store the events.
 
 
-What is preferred way of communication between microservices?
+**What is preferred way of communication between microservices?**
 
 > Synchronous - Request/Response based
 > Asynchronous - Event Based
 
+**Plug & Play Tools**
+.Net and .Net Core - https://dotnetfiddle.net/
+Visual Studio Online - https://online.visualstudio.com/
+Kubernetes - https://labs.play-with-k8s.com/
+Code and collaborate - https://repl.it/repls/  -- (Supports 50 languages)
 
 What is the difference between Orchestration and Choreography in Microservices architecture? 
 
@@ -1034,7 +1040,7 @@ Whereas, Choreography is a loose coupling approach. Choreography based systems a
 
 What are the issues in using REST over HTTP for Microservices? 
 
-In general, REST over HTTP is one of the most popular implementations of Microservices. Some of the issues in using REST over HTTP for Microservices are as follows: In REST over HTTP, it is difficult to generate a client stub.  Some Web-Servers do not support all the HTTP verbs like- GET, PUT, POST, DELETE etc.   Due to JSON or plain text in response, performance of   over HTTP is better than SOAP. But it is not as good as plain binary communication.  There is an overhead of HTTP in each request for communication.  HTTP is not well suited for low-latency communication.  There is more work in consumption of payload. There may be overhead of serialization, deserialization in HTTP.
+In general, REST over HTTP is one of the most popular implementations of Microservices. Some of the issues in using REST over HTTP for Microservices are as follows: In REST over HTTP, it is difficult to generate a client stub.  Some Web-Servers do not support all the HTTP verbs like- GET, PUT, POST, DELETE etc.   Due to JSON or plain text in response, performance of   over HTTP is better than SOAP. But it is not as good as plain binary communication.  There is an overhead of HTTP in each request for communication.  HTTP is not well suited for low-latency communication.  There is more work in consumption of payload. There may be overhead of serialization, deserialization in HTTP.
 
 Can we create Microservices as State Machines? Yes, Microservices are independent entities that serve a specific context. For that context, a Microservice can work as a State Machine. In a State Machine, there are lifecycle events that cause change in the state of the system.
 
@@ -1079,13 +1085,13 @@ DNS: We can simply use Domain Naming System in such a way that it is intuitive t
 
 Apache Zookeeper: It is an open source software from Apache foundation for maintaining configuration information, naming, providing distributed synchronization and providing group services. It has a hierarchical namespace for storing information about services and their configuration.  
 
-Consul: It is another REST based tool for dynamic service registry. You can use it to register a new service, add health-checks for a service etc.   
+Consul: It is another REST based tool for dynamic service registry. You can use it to register a new service, add health-checks for a service etc.   
 
 Eureka: Netflix has provided an open source system known as Eureka that provides load-balancing capabilities in addition to service discovery. It is preferred in a Java environment in AWS cloud.
 
 
 What is an API Gateway? API Gateway is a service from Amazon in AWS cloud. This is used for creating, publishing, monitoring and maintaining secure APIs in cloud. It is an important part of Microservices architecture in AWS. This works as a "front door" for
-applications to access resources in AWS cloud. API Gateway supports services at a large scale as well as concurrent API calls.  We can also create REST endpoints for existing services by using API Gateway.  It supports request throttling, traffic monitoring etc features to manage Microservices architecture very well.
+applications to access resources in AWS cloud. API Gateway supports services at a large scale as well as concurrent API calls.  We can also create REST endpoints for existing services by using API Gateway.  It supports request throttling, traffic monitoring etc features to manage Microservices architecture very well.
 
 How will you attain high availability with Microservice API gateway? There are many options in Amazon Web Services (AWS) to build a Microservices based system with high availability. We can use API Gateway to build the APIs. But these options are very helpful in creating a Highly Available service. Some of these options are: I. Elastic IPs: We can failover gracefully by using Elastic IPs in AWS. An Elastic IP is a static IP that is dynamically re-mappable. We can quickly remap and failover to another set of servers so that application traffic is routed to the new set of servers. It is also very useful when we want to upgrade from old to new version of software. II. Availability Zones: We can use multiple Availability Zones to introduce resiliency in AWS system. An Availability Zone is like a logical datacenter. By deploying application in multiple availability zones, we can ensure highly availability of a Microservice. III. Amazon Machine Image: We can maintain an Amazon Machine Image for a Microservice to restore and clone environments easily in a different Availability Zone. We can use multiple Database slaves across Availability Zones and setup hot replication with these Machine images. IV. Amazon CloudWatch: This is a real-time open source monitoring tool in AWS that provides visibility of a service in AWS cloud. We can take appropriate actions in case of hardware failure or performance degradation by setting alerts on CloudWatch. V. Auto scaling: We can maintain an auto-scaling group to maintain a fixed number of servers for a Microservice. In case of failure or performance degradation unhealthy Amazon EC2 instances are replaced by new ones.
 
@@ -1096,12 +1102,12 @@ First of all we have to determine, how are we calling legacy system from a Micro
 
 How will you store data in Microservice architecture? In Microservice architecture, each Microservice stores its data within itself. But that does not mean that each instance of same Microservice will have its own data store. For performance improvement, if we implement Sharding then each instance of same Microservice maintains its own shard. The data specific to a Microservice instance is stored in its shard. There are scenarios when we have to keep a common data-store between Microservices. This is generally done for Microservices that are computation intensive. In such a scenario, we implement a Microservice to cache the data that does not get updated very often.
 
-What is a Circuit Breaker pattern in the context of Microservice? Circuit Breaker is a software design pattern similar to the one used in electrical devices. In an electrical device, we use circuit breaker to break the flow of current in an unforeseen situation. This ensures that the electrical device is not damaged due to an unexpected issue. In the context of Microservices, it can be implemented in various scenarios. If the number of requests to a Microservice increases beyond a threshold then circuit breaker becomes active and blocks extra calls. If the number of failed requests to a Microservice reach a threshold then circuit breaker becomes active and the requests are throttled for a period of time. After that circuit breaker sends a few requests to check if Microservice has recovered or not. In Microservices, sometimes circuit breaker stores and queues up the failed requests for retry at a later time. In certain cases, it is better to fail fast and give immediate response to clients for a synchronous request. Circuit breaker can also be used to implement Bulkhead design pattern in Microservices.
+What is a Circuit Breaker pattern in the context of Microservice? 
 
-What is Bulkhead design pattern? Bulkhead is a software design pattern to create a stable and fault tolerant system. In this pattern, if one part of a system fails, then other parts keep functioning normally rather than bringing the whole system down. While designing a system, we create separate components in a watertight compartment like manner. If one component fails, we just close access to that component and try to fix it. Rest of the system keeps working business as usual (BAU). Netflix’s Hysterix library provides two ways to implement Bulkhead design pattern. Thread Isolation: In this case, if calls to a component fail then these are directed to thread pool with fixed number of threads.  Semaphore Isolation:  In this case, all callers acquire a permit before making a request. If caller doesn’t get permit then it means the component is down.  Currently Hysterix library is in maintenance mode. Nowadays, resilience4j is the open source library that provides fault tolerance functionality similar to Hysterix.
+Circuit Breaker is a software design pattern similar to the one used in electrical devices. In an electrical device, we use circuit breaker to break the flow of current in an unforeseen situation. This ensures that the electrical device is not damaged due to an unexpected issue. In the context of Microservices, it can be implemented in various scenarios. If the number of requests to a Microservice increases beyond a threshold then circuit breaker becomes active and blocks extra calls. If the number of failed requests to a Microservice reach a threshold then circuit breaker becomes active and the requests are throttled for a period of time. After that circuit breaker sends a few requests to check if Microservice has recovered or not. In Microservices, sometimes circuit breaker stores and queues up the failed requests for retry at a later time. In certain cases, it is better to fail fast and give immediate response to clients for a synchronous request. Circuit breaker can also be used to implement Bulkhead design pattern in Microservices.
+
+What is Bulkhead design pattern? Bulkhead is a software design pattern to create a stable and fault tolerant system. In this pattern, if one part of a system fails, then other parts keep functioning normally rather than bringing the whole system down. While designing a system, we create separate components in a watertight compartment like manner. If one component fails, we just close access to that component and try to fix it. Rest of the system keeps working business as usual (BAU). Netflix’s Hysterix library provides two ways to implement Bulkhead design pattern. Thread Isolation: In this case, if calls to a component fail then these are directed to thread pool with fixed number of threads.  Semaphore Isolation:  In this case, all callers acquire a permit before making a request. If caller doesn’t get permit then it means the component is down.  Currently Hysterix library is in maintenance mode. Nowadays, resilience4j is the open source library that provides fault tolerance functionality similar to Hysterix.
 
 What is Idempotency of a Microservice operation? Idempotency refers to getting same result even after doing same operation multiple times in a Microservice. E.g. Let say, we have to send a reminder email to a customer for an upcoming bill payment on the due date. Our Microservice provides an idempotent Reminder oHow will you store data in Microservice architecture? In Microservice architecture, each Microservice stores its data within itself. But that does not mean that each instance of same Microservice
 
 Powerhouse, Knowledge. Top 50 Microservices Interview Questions & Answers: Good Collection of Questions Faced in Architect Level Technical Interviews (updated 2020 version) . Kindle Edition. peration, so that even if we call this operation multiple times on the due date, it sends only one email per day. This will give better experience to customer instead of sending multiple reminders for same payment on same day.
-
-
