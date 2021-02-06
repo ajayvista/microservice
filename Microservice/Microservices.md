@@ -380,8 +380,8 @@ Microservices(distrbuted piece of Software) Design Principles
 		- Shareable code libraries promote to service
 
 
-Scoping microservice using bounded context
-=============================================
+# Scoping microservice using bounded context
+
 
 ###  Domain driven design (a design that models real world domains)
 	- Domain consists of multiple bounded context (describe functions assocaited with-in domain), each bounded ccontext represents a domain function - a specific responsibility enforced by an explicit boundry
@@ -413,8 +413,8 @@ Scoping microservice using bounded context
 		- Overlaping language in the boundry
 
 
-How to architect Asynchronous Microservics
-==============================================
+# How to architect Asynchronous Microservics
+
 
 ## Event Based (Client <-.-> Message/Event Broker <-.-> Service)
 Event brokers enable an immutable, append-only log of facts that preserves the state of event ordering. The consumer can pick up and reprocess from anywhere in the log at any time. This pattern is essential for enabling event-driven microservices, but it is not available with message brokers.
@@ -456,10 +456,9 @@ This model provides several essential features that are required for running an 
 	- 	
 
 
-Architectural Patterns for Microservices
-==========================================
+# Architectural Patterns for Microservices
 
-###	Microservices principles
+### Microservices principles
 
 - Independent Deployment
 - Technology Agonstic
@@ -573,6 +572,7 @@ How to compose microservics?
  		- Open source - api gateway -> Konghq.com
 
 ### Split monolitihic database across microservices
+
 	- Monolithic database
 		- Provide ability to share daya easily
 	- Why we should avoid
@@ -655,6 +655,7 @@ How to compose microservics?
 					- move to shared libraries
 
 ### Resilency
+
 	- Need for resiliency
 		- Distributed Architecture
 		- Fault tolerance 
@@ -783,6 +784,7 @@ How to compose microservics?
 	-	
 
 ### Define and document microservice contract
+
 -	Consumer driven contract, taken consumer application as requirement based on types of request to fulfill the use case., Documented as computer driven language so that unit test and validate contract between both parties.
 -	Resource based microservice, restful style where every endpoint considered as managing resource using http verb.
 -	Action based microservice - Restful style microservice using actions(starting with verb on top of resource). ex: myapi.org/orders/cancelorder/{ordeerid}
@@ -792,7 +794,7 @@ How to compose microservics?
 --	Tools - generate test suits, mock APIs and documentation.
 -- Swagger - based on open api specification, it's implementation of interface defination langugage
 
-### Implement micro services centralized logging
+### Implement Microservices centralized logging
 
 	> Distributed architecture but centralized logging
 	. Consistent format (json/xml)
@@ -860,7 +862,6 @@ How to compose microservics?
 		. Migrate existing
 		. Meet hardware capacity spikes
 
-
 	> PAAS (Platform as a service)
 		. Ideal for developers
 		. On Demand delivery environment
@@ -872,7 +873,6 @@ How to compose microservics?
 		. Focus on shipping
 		
 	> SAAS(Software as a service)		. 
-
 	> Applications
 	> Data
 	> Runtime
@@ -885,6 +885,7 @@ How to compose microservics?
 
 
 ### Managing microservices configuration
+
 	> Parameters to affect behavior
 	> Endpoint information
 	> Connection string
@@ -893,16 +894,16 @@ How to compose microservics?
 
 	Solution options
 		> Deployment servers
-			. Central configuration that overrides config
-			. Different for each enviornment
-			. Configuration values as variables
-				- Key, value pairs
-				- Substituted in your app configuration files
-				- Available in deployment definitions
-			. Inteellignet configuration definitions
-				- Scope for variables
-				- Full deployment tool support
-				- Library sets
+		. Central configuration that overrides config
+		. Different for each enviornment
+		. Configuration values as variables
+			- Key, value pairs
+			- Substituted in your app configuration files
+			- Available in deployment definitions
+		. Inteellignet configuration definitions
+			- Scope for variables
+			- Full deployment tool support
+			- Library sets
 
 		> Externalized configuration pattern
 			. External storage
@@ -916,6 +917,7 @@ How to compose microservics?
 
 
 ### Manage microservices registration and discovery
+
 	> Client side discovery
 		.  Calling client application responsible
 			> Discovery: Finding service instance location
@@ -1019,8 +1021,8 @@ How to compose microservics?
 		. etc.
 
 
-Data Management Patterns for Microservices
-==========================================
+# Data Management Patterns for Microservices
+
 
 **Database Per Service**
 - In this pattern, each microservice manages its own data. What this implies is that no other microservice can access that data directly. 
@@ -1045,6 +1047,72 @@ An application listens to domain events from other microservices and updates the
 **Event Sourcing**
 
 In event sourcing, you store the state of the entity or the aggregate as a sequence of state changing events. A new event is created whenever there is an update or an insert. The event store is used to store the events.
+
+
+# Data Libration Patterns for Microservices
+
+### Query-based
+
+You extract data by querying the underlying state store. This can be performed on any data store.
+
+- Bulk Loading
+- Incremental Timestamp Loading
+- Autoincrementing ID Loading
+- Custom Querying
+- Incremental Updating
+
+#### Benefits of Query-Based Updating
+
+| Pros | Cons |
+|-----|-----|
+|Customizability | Required updated-at timestamp|
+|Independent polling periods | Untraceable hard deletions|
+|Isolation of internal data models | Brittle dependency between data set schema and output event schema|
+||Intermittent capture|
+||Production resource consumption|
+||Variable query performance due to data changes|
+|-----------|-----------------|
+
+### Log-based
+
+You extract data by following the append-only log for changes
+
+| Pros | Cons |
+|-----|-----|
+|Delete tracking | Exposure of internal data models|
+|Minimal effect on data store performance | Denormalization outside of the data store|
+|Low-latency updates | Brittle dependency between data set schema and output event schema|
+|--------------|-----------------|
+
+
+### Table-based
+
+In this pattern, you first push data to a table used as an output queue. Another thread or separate process queries the table, emits the data to the relevant event stream, and then deletes the associated entries.
+
+This pattern provides at-least-once delivery guarantees.
+
+- > Performance Considerations
+- > Isolating Internal Data Models
+- > Ensuring Schema Compatibility
+
+| Pros | Cons |
+|-----|-----|
+|Multilanguage support |  |
+|Low overhead for small data sets | Data store performance impact |
+|Customizable logic | Business process performance impact|
+|Denormalization | Required application code changes |
+|--------------|-----------------|
+
+
+### Other - Capturing Change-Data Using Triggers
+
+| Pros | Cons |
+|-----|-----|
+|Supported by most databases | Performance overhead |
+|Before-the-fact schema enforcement | Change management complexity |
+|Isolation of the internal data model | Poor scaling |
+|Denormalization | After-the-fact schema enforcement - Schema enforcement for the output event occurs only after the record has been published to the outbox table.|
+|--------------|-----------------|
 
 
 **What is preferred way of communication between microservices?**
