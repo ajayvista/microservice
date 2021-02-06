@@ -1,6 +1,22 @@
 
 Microservices
 =============
+# Request & Response Pattern (Synchronous)
+
+### Biggest shortcomings of synchronous request-response microservices.
+- POINT-TO-POINT COUPLINGS - The number of connections between services can become staggeringly high, which further entrenches the existing communication structures and makes future changes more difficult.
+- DEPENDENT SCALING - Complicated by highly variable loads and surging request patterns, which all need to be handled synchronously across the entire architecture.
+- Service failure handling - Deciding how to handle the outages, when to retry, when to fail, and how to recover to ensure data consistency becomes increasingly difficult the more services there are within the ecosystem.
+- API versioning and dependency management - Orchestrating API change requests across multiple services, especially if they are accompanied by changes to the underlying data structures.
+- Data access tied to the implementation - This puts the onus of data access and scalability back on the implementation communication structure.
+- Distributed monoliths - Synchronous point-to-point calls to mimic the existing boundaries within their monolith.
+- TESTING - Integration testing can be difficult, as each service requires fully operational dependents, which require their own in turn. Stubbing them out may work for unit tests, but seldom proves sufficient for more extensive testing requirements.
+
+### Benefits of Synchronous Microservices
+- Certain data access patterns are favorable to direct request-response couplings such as authenticating a user and reporting on an AB test. 
+- Integrations with external third-party solutions almost always use a synchronous mechanism and generally provide a flexible
+- Language-agnostic communication mechanism over HTTP.
+
 
 Microservices(distrbuted piece of Software) Design Principles
 =============================================
