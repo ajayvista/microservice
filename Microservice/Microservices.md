@@ -547,6 +547,7 @@ How to compose microservics?
 			- Event based
 
 ### Centralize access to microservices using an API Gateway
+
  	Why and how we need centralize access?
  	- API Gateway - why ?
  		- Since microservice is distributed architeture where it comes with lots of feature and benefits, there are some complexivty comes inheritnly that we can resolve with some pattern and practices.. some complexitity like
@@ -827,24 +828,81 @@ How to compose microservics?
 			> HTTPS logging connections
 			> In-line with data retention policies
 
-### Reporting from distributed microservice data
+# Reporting from distributed microservice data
 
 #### Solution options for central reporting
 
->**Reporting service** - Calls other services and pull required data and store into local db for further reporting or process
-
-> **Data push application** - Data push application work with each service and push to common db after some transformation for reporting, ensuring right data picked and converted into right format and pushed to right location. (converting transaction data into reporting data)
-
-> **Reporting event subscriber** - send reporting data to reporting system as series of event, microservice raises change event to message system and reporting service listen and store data into central reporting system (event sourcing) -> transform the data -> save into central reporting database.
-
-> **Reporting events via Gateway**
+- > Reporting service - Calls other services and pull required data and store into local db for further reporting or process
+- > Data push application - Data push application work with each service and push to common db after some transformation for reporting, ensuring right data picked and converted into right format and pushed to right location. (converting transaction data into reporting data)
+- > Reporting event subscriber** - send reporting data to reporting system as series of event, microservice raises change event to message system and reporting service listen and store data into central reporting system (event sourcing) -> transform the data -> save into central reporting database.
+- > Reporting events via Gateway**
 	> -- Client App/Api => API Gateway => Message Broker => Data Push App=> Event Sourcing=> Reporting Service => Central reporting database
-
- > **Using backup imports for reporting**
+- > Using backup imports for reporting**
  	- Backup database -> data import/jobs/app -> Reporting service -> central reporting database
-
- > **ETL and Data-warehouses**
+- > ETL and Data-warehouses**
  	Orders+Customer => ETL Process (Extract => Transform => Load into datawarehouse) => Reporting service => central database
+
+# Data Libration Patterns for Microservices
+
+### Query-based
+
+You extract data by querying the underlying state store. This can be performed on any data store.
+
+- Bulk Loading
+- Incremental Timestamp Loading
+- Autoincrementing ID Loading
+- Custom Querying
+- Incremental Updating
+
+#### Benefits of Query-Based Updating
+
+| Pros | Cons |
+|-----|-----|
+|Customizability | Required updated-at timestamp|
+|Independent polling periods | Untraceable hard deletions|
+|Isolation of internal data models | Brittle dependency between data set schema and output event schema|
+||Intermittent capture|
+||Production resource consumption|
+||Variable query performance due to data changes|
+|-----------|-----------------|
+
+### Log-based
+
+You extract data by following the append-only log for changes
+
+| Pros | Cons |
+|-----|-----|
+|Delete tracking | Exposure of internal data models|
+|Minimal effect on data store performance | Denormalization outside of the data store|
+|Low-latency updates | Brittle dependency between data set schema and output event schema|
+
+### Table-based
+
+In this pattern, you first push data to a table used as an output queue. Another thread or separate process queries the table, emits the data to the relevant event stream, and then deletes the associated entries.
+
+This pattern provides at-least-once delivery guarantees.
+
+- > Performance Considerations
+- > Isolating Internal Data Models
+- > Ensuring Schema Compatibility
+
+| Pros | Cons |
+|-----|-----|
+|Multilanguage support |  |
+|Low overhead for small data sets | Data store performance impact |
+|Customizable logic | Business process performance impact|
+|Denormalization | Required application code changes |
+
+
+### Other - Capturing Change-Data Using Triggers
+
+| Pros | Cons |
+|-----|-----|
+|Supported by most databases | Performance overhead |
+|Before-the-fact schema enforcement | Change management complexity |
+|Isolation of the internal data model | Poor scaling |
+|Denormalization | After-the-fact schema enforcement - Schema enforcement for the output event occurs only after the record has been published to the outbox table.|
+
 
 ### Cloud based APIs
 	> High cohesion, autonomous, business domain, resilience, obserable and automation
@@ -1047,72 +1105,6 @@ An application listens to domain events from other microservices and updates the
 **Event Sourcing**
 
 In event sourcing, you store the state of the entity or the aggregate as a sequence of state changing events. A new event is created whenever there is an update or an insert. The event store is used to store the events.
-
-
-# Data Libration Patterns for Microservices
-
-### Query-based
-
-You extract data by querying the underlying state store. This can be performed on any data store.
-
-- Bulk Loading
-- Incremental Timestamp Loading
-- Autoincrementing ID Loading
-- Custom Querying
-- Incremental Updating
-
-#### Benefits of Query-Based Updating
-
-| Pros | Cons |
-|-----|-----|
-|Customizability | Required updated-at timestamp|
-|Independent polling periods | Untraceable hard deletions|
-|Isolation of internal data models | Brittle dependency between data set schema and output event schema|
-||Intermittent capture|
-||Production resource consumption|
-||Variable query performance due to data changes|
-|-----------|-----------------|
-
-### Log-based
-
-You extract data by following the append-only log for changes
-
-| Pros | Cons |
-|-----|-----|
-|Delete tracking | Exposure of internal data models|
-|Minimal effect on data store performance | Denormalization outside of the data store|
-|Low-latency updates | Brittle dependency between data set schema and output event schema|
-|--------------|-----------------|
-
-
-### Table-based
-
-In this pattern, you first push data to a table used as an output queue. Another thread or separate process queries the table, emits the data to the relevant event stream, and then deletes the associated entries.
-
-This pattern provides at-least-once delivery guarantees.
-
-- > Performance Considerations
-- > Isolating Internal Data Models
-- > Ensuring Schema Compatibility
-
-| Pros | Cons |
-|-----|-----|
-|Multilanguage support |  |
-|Low overhead for small data sets | Data store performance impact |
-|Customizable logic | Business process performance impact|
-|Denormalization | Required application code changes |
-|--------------|-----------------|
-
-
-### Other - Capturing Change-Data Using Triggers
-
-| Pros | Cons |
-|-----|-----|
-|Supported by most databases | Performance overhead |
-|Before-the-fact schema enforcement | Change management complexity |
-|Isolation of the internal data model | Poor scaling |
-|Denormalization | After-the-fact schema enforcement - Schema enforcement for the output event occurs only after the record has been published to the outbox table.|
-|--------------|-----------------|
 
 
 **What is preferred way of communication between microservices?**
