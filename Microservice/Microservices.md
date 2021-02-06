@@ -416,7 +416,20 @@ Scoping microservice using bounded context
 How to architect Asynchronous Microservics
 ==============================================
 
-## Event Based (Client <-.-> Message Broker <-.-> Service)
+## Event Based (Client <-.-> Message/Event Broker <-.-> Service)
+Event brokers enable an immutable, append-only log of facts that preserves the state of event ordering. The consumer can pick up and reprocess from anywhere in the log at any time. This pattern is essential for enabling event-driven microservices, but it is not available with message brokers.
+
+Event order is not maintained when processing from a queue. Parallel consumers consume and process events out of order, while a single consumer may fail to process an event, return it to the queue for processing at a later date, and move on to the next event.
+
+This model provides several essential features that are required for running an ecosystem at scale:
+
+### Benefits
+	- > Scalability - Increase the cluster’s production, consumption, and data storage capacity
+	- > Durability - permits a cluster of brokers to both preserve and continue serving data when a broker fails.
+	- > High availability - in the case of a broker failure this permits the clients to maintain full uptime.
+	- > High-performance - Multiple broker nodes share the production and consumption load. 
+	
+### Patterns
 	- Competing workers pattern
 	- Fanout pattern
 	- Options
@@ -940,7 +953,7 @@ How to compose microservics?
 			. etc.		
 
 
-###	Monitoring Microservices
+### Monitoring Microservices
 
 	- Why the need to monitoring
 		-- Microservices complexity
