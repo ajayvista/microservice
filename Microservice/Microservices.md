@@ -903,6 +903,10 @@ This pattern provides at-least-once delivery guarantees.
 |Denormalization | After-the-fact schema enforcement - Schema enforcement for the output event occurs only after the record has been published to the outbox table.|
 
 
+### Liberalization of data
+![Data Liberalization](data-migration-reporting.jpg)
+
+
 ### Cloud based APIs
 	> High cohesion, autonomous, business domain, resilience, obserable and automation
 
