@@ -74,6 +74,7 @@ https://channel9.msdn.com/Shows/On-NET/NET-Microservices-with-Steeltoe
 
 ### /health
 Returns UP or DOWN information based on built-in health contributors, or any custom ones you write.
+https://dzone.com/articles/an-overview-of-health-check-patterns
 
 ### /info
 Returns Git information as well as any app configuration values under the “info” key.
