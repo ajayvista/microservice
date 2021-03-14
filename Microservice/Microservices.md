@@ -21,169 +21,170 @@ Microservices
 Microservices(distrbuted piece of Software) Design Principles
 =============================================
 ### High Cohesion - Single focuns, 
-	- Identify single business function(in has own clear own input and output)
-	- or Identity in the form business domain
-	- Split into finer grained services
-	- Avoid "Is kind of the same"
-	- Changes in one business function should not change in other business function (one service one reason to change)
-	- Don't get lazy to create many services
+- Identify single business function(in has own clear own input and output)
+- or Identity in the form business domain
+- Split into finer grained services
+- Avoid "Is kind of the same"
+- Changes in one business function should not change in other business function (one service one reason to change)
+- Don't get lazy to create many services
 
 ### Autonomous - independently deploybale and changable
 
-	- Approch : Lossely coupled, dependnt on each other minimal way (not physical connecteed, communication by network (Synchornous/Asynchronous-Publish and Subscribe event))
-	- Technology agnostic API
-	- Avoid client liraries
-	- Contracts between services
-	- Fixed and agreed interfaces, shared models, and clear input and output
-	- Avoid chatty exchanges between services
-	- Avoid sharing between servicees
-		- database
-		- shared libraries
+- Approch : Lossely coupled, dependnt on each other minimal way (not physical connecteed, communication by network (Synchornous/Asynchronous-Publish and Subscribe event))
+- Technology agnostic API
+- Avoid client liraries
+- Contracts between services
+- Fixed and agreed interfaces, shared models, and clear input and output
+- Avoid chatty exchanges between services
+- Avoid sharing between servicees
+	- database
+	- shared libraries
 
-	- Approach : Autonomous
-		- Microservice ownership by team, responsiblity of team to agreeing contracts between teams and long-term maintenance
-		- Collaborative development
-			- Communicate contract requirements
-			- Communicate data requirements
-		- Concurrent development
-		- Versiooning
-			- Avoid bbreaking changes
-			- Backward compatibility
-			- Integration tests
-			- Have a versioning strategy
-				- Concurrent versions (old and new)
-				- Coexisting endpoints (/v2/customer, v1/customer)
-				- Semantic versioning (mahor.minor.path)
+- Approach : Autonomous
+	- Microservice ownership by team, responsiblity of team to agreeing contracts between teams and long-term maintenance
+	- Collaborative development
+		- Communicate contract requirements
+		- Communicate data requirements
+	- Concurrent development
+	- Versiooning
+		- Avoid bbreaking changes
+		- Backward compatibility
+		- Integration tests
+		- Have a versioning strategy
+			- Concurrent versions (old and new)
+			- Coexisting endpoints (/v2/customer, v1/customer)
+			- Semantic versioning (mahor.minor.path)
 
 
 ### Business Domain Centric
-	- One microservice contains all the functionality that one domain holds
-	- Review benefits of splitting further
-	- Must do one thing and do it well
-	- Agreementee a common langugae
-	- Fix incorrect boundaries
-		- Meerge or split 
-	- Explict interface for outside world
-	- Splitting using technical boundaries
-		- Service to access archive data
-		- For performance tuning
+- One microservice contains all the functionality that one domain holds
+- Review benefits of splitting further
+- Must do one thing and do it well
+- Agreementee a common langugae
+- Fix incorrect boundaries
+	- Meerge or split 
+- Explict interface for outside world
+- Splitting using technical boundaries
+	- Service to access archive data
+	- For performance tuning
 
 
 ### Resilience - Embrace failure
 
-	- Design for known failures
-	- Failure of downstream systems
-		- Other services internal or external 
-	- Degrade functionality on failure detection
-	- Default functionality on faiulure detection
-	- Design system t fail fast
-	- Use timeouts
-		- Use for connected systems
-		- Timeout our requiests after a threshold
-		- Service to service
-		- Service to other system
-		- Standard timeout length
-		- Adjust length on a case by case basis
-	- Network outages and latency
-	- Monitor timeouts
-	- Log timeouts
+- Design for known failures
+- Failure of downstream systems
+	- Other services internal or external 
+- Degrade functionality on failure detection
+- Default functionality on faiulure detection
+- Design system t fail fast
+- Use timeouts
+	- Use for connected systems
+	- Timeout our requiests after a threshold
+	- Service to service
+	- Service to other system
+	- Standard timeout length
+	- Adjust length on a case by case basis
+- Network outages and latency
+- Monitor timeouts
+- Log timeouts
 
 ### Obserable - Centrialized and Monitoring
-	- Centrlized monitoring
-	- Monitor the host
-		- CPU, memory, disk usage
-	- Expose metrics within the service
-		- Reponse times
-		- Timeouts
-		- Exceeptions and errors
-	- Business data related metrics
-		- Number of orders
-		- Average time from basket to checkout
-	- Collect and aggregate monitoring data
-		- Monitoring tools that provide aggregation
-		- Monitoring tools that provide drill down options
-	- Monitoring tool that ccan help visualise trends
-	- Mpnitoring tool that can compare data across servers
-	- Monitoring tool that can trigger alerts
-	
-	#### Centralized Logging 
-	(Why happend and what happened, seeing the the whole story what has happened)
-		- When to log
-			-	Startup or shutdown
-			-	Code path milestones
-					- Requests, responses and decisions
-			-	Timeouts, exceptions and error
-		- Structured Logging
-			- Level
-				- Information, Error, Debug, Stats
-			- Datee and time
-			- Correlation ID
-			- Hostname
-			- Service name and service instance
-			- Message/Key(index key - help to query)
-		- Tracebale distributed transactions
-			- Correlation ID
-			- Passeed service to service
+- Centrlized monitoring
+- Monitor the host
+	- CPU, memory, disk usage
+- Expose metrics within the service
+	- Reponse times
+	- Timeouts
+	- Exceeptions and errors
+- Business data related metrics
+	- Number of orders
+	- Average time from basket to checkout
+- Collect and aggregate monitoring data
+	- Monitoring tools that provide aggregation
+	- Monitoring tools that provide drill down options
+- Monitoring tool that ccan help visualise trends
+- Mpnitoring tool that can compare data across servers
+- Monitoring tool that can trigger alerts
+
+#### Centralized Logging 
+(Why happend and what happened, seeing the the whole story what has happened)
+	- When to log
+		-	Startup or shutdown
+		-	Code path milestones
+				- Requests, responses and decisions
+		-	Timeouts, exceptions and error
+	- Structured Logging
+		- Level
+			- Information, Error, Debug, Stats
+		- Datee and time
+		- Correlation ID
+		- Hostname
+		- Service name and service instance
+		- Message/Key(index key - help to query)
+	- Tracebale distributed transactions
+		- Correlation ID
+		- Passeed service to service
 
 
 ### Automation - tools to feedback and testing
-	#### CI
-		-	Work with source control ssystem
-		- 	Automatic after check-in
-		-	Unit tests and integration test required
-		-	Ensure quality of check-in
-			- Code compilees
-			- Test pass
-			- Canges integrate
-			- Quick feedback
-		- Urgency to fix integration issue
-		- Creation of build
-		- Build ready for deployment and ready for production
+#### CI
+-	Work with source control ssystem
+- 	Automatic after check-in
+-	Unit tests and integration test required
+-	Ensure quality of check-in
+	- Code compilees
+	- Test pass
+	- Canges integrate
+	- Quick feedback
+- Urgency to fix integration issue
+- Creation of build
+- Build ready for deployment and ready for production
 
-	#### CD
-		-	Automate software deployment
-			-	Configure once
-			-	Works with CI tools
-			-	Deployable after checkin
-			-	Reliably relased at anytime
-		-	Benefits
-			- Quick to market
-			- Reliable deployment
-			- Better customer experience
+#### CD
+-	Automate software deployment
+	-	Configure once
+	-	Works with CI tools
+	-	Deployable after checkin
+	-	Reliably relased at anytime
+-	Benefits
+	- Quick to market
+	- Reliable deployment
+	- Better customer experience
 
-### Technology for Microservices
+# Technology for Microservices
 
-	### Virtualization
-	-	A virtual machine as a host (platform as service (PAAS))
-	-	
-	### Containers
-	-	Type of virtualization
-	-	Isolate service from each other
-	-	Single service per container
-	-	Different to a virtual machine
-		- Use less resource than VM
-		- Faster than VM
-		- Quicker to create new instances
-		Ex: docker, Rocker, glassware
-	
-	### Self-hosting
-		- Use of physical machines
-		- Single service on a server or multiple services on a server
+### Virtualization
+-	A virtual machine as a host (platform as service (PAAS))
+-	
+### Containers
+-	Type of virtualization
+-	Isolate service from each other
+-	Single service per container
+-	Different to a virtual machine
+	- Use less resource than VM
+	- Faster than VM
+	- Quicker to create new instances
+	Ex: docker, Rocker, glassware
 
-		Challenges
-		- Scaling is not as immediate
-		- Need for tech
-	### Registration and Discovery
-		- Service registry database
-		- Register on startup
-		- Deregister service on failure
-	 	- Cloud platforms make it easy
-	 	- Local platform registration options
-	 		- Self registration
-	 		- Third party registration
-	 	- Local platform discovery options
-	 		- Client side discovery
-	 		- Server side discovery
+### Self-hosting
+- Use of physical machines
+- Single service on a server or multiple services on a server
+
+Challenges
+- Scaling is not as immediate
+- Need for tech
+
+### Registration and Discovery
+- Service registry database
+- Register on startup
+- Deregister service on failure
+- Cloud platforms make it easy
+- Local platform registration options
+	- Self registration
+	- Third party registration
+- Local platform discovery options
+	- Client side discovery
+	- Server side discovery
 
 #### Monitoring Tech
 ##### Centralised tools
