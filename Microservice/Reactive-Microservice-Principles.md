@@ -39,9 +39,8 @@ The four functions of protection:
 
 - **Recovery** 
 	- Ability to actively recover after the adverse event is over (whereby recovery is implemented by recovery techniques). 
-	- Recovery can also be partial (e.g., full service is restored using redundant resources without replacement/repair) or minimal (e.g., degraded mode operations providing only limited services). 
+	- Recovery can also be partial or minimal (e.g., degraded mode operations providing only limited services). 
 	- Recovery might also include the system evolving or adapting (e.g., via reconfiguring itself) to avoid future occurrences of the adverse events or conditions.
-
 
 
 ### Achieved by 
