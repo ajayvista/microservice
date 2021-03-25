@@ -797,36 +797,38 @@ How to compose microservics?
 
 ### Implement Microservices centralized logging
 
-	> Distributed architecture but centralized logging
-	. Consistent format (json/xml)
-		- Shared libraries
-		- Importance of transcation transperency using Structured format
-			> Consistent metadata
-				> Correlation Id
-				> Date and Time
-				> Host and app information
-			> Logs (problem solving data)-> Logging API -> UI or Portal (Problem solving assistent)
-			> Logging Levels
-				. Info
-					-Non-technical descriptive message
-					- Simple enough for entire business
-					- Key transaction milestones
-				. Debug
-					- Techinical milestones
-					- calls and parameters
-					- Response times and timeout stats
-				. Error level
-					- information on exceptions raised
-					- Error information and number
-					- call stack
-			> Message
-			> Decoupled from implementation, shared libraries
-			> Avoid log buffering, log in sequence date to support sequence
-			> Performance test logging frequence
-			-- Making Secured access --
-			> Controlled acceess to database and portal
-			> HTTPS logging connections
-			> In-line with data retention policies
+> Distributed architecture but centralized logging
+. Consistent format (json/xml)
+- Shared libraries
+- Importance of transcation transperency using Structured format
+	> Consistent metadata
+		> Correlation Id
+		> Date and Time
+		> Host and app information
+	> Logs (problem solving data)-> Logging API -> UI or Portal (Problem solving assistent)
+	> Logging Levels
+		. Info
+			-Non-technical descriptive message
+			- Simple enough for entire business
+			- Key transaction milestones
+		. Debug
+			- Techinical milestones
+			- calls and parameters
+			- Response times and timeout stats
+		. Error level
+			- information on exceptions raised
+			- Error information and number
+			- call stack
+	> Message
+	> Decoupled from implementation, shared libraries
+	> Avoid log buffering, log in sequence date to support sequence
+	> Performance test logging frequence
+	-- Making Secured access --
+	> Controlled acceess to database and portal
+	> HTTPS logging connections
+	> In-line with data retention policies
+
+Ref: https://opentracing.io/
 
 # Reporting from distributed microservice data
 
@@ -980,41 +982,41 @@ This pattern provides at-least-once delivery guarantees.
 
 ### Manage microservices registration and discovery
 
-	> Client side discovery
-		.  Calling client application responsible
-			> Discovery: Finding service instance location
-			> Load balancing requests across instances	
-		. Client application uses service registry database
+> Client side discovery
+	.  Calling client application responsible
+		> Discovery: Finding service instance location
+		> Load balancing requests across instances	
+	. Client application uses service registry database
+		> Use to retrieve a location of an instance
+		> Location is registered on instance startup
+		> Location is deregistered if an instance is removed
+		> Periodically health/check instance existence
+	. Drawbacks
+		> Client applications are reliant of service registry
+		> Client application must implement client side dicovery
+
+> Service side discovery
+		. Client makes service requests via load balancer
+			> Load balancer routes requests to a service
+			> Load balancer uses a service registry database
+		. Load balancer uses service registry database
 			> Use to retrieve a location of an instance
 			> Location is registered on instance startup
-			> Location is deregistered if an instance is removed
-			> Periodically health/check instance existence
+			> Location is deregistered if an innstance is removed
+			> Periodically check instance existence
+		. Advantage
+			> Removes seervices discovery logic from client
 		. Drawbacks
-			> Client applications are reliant of service registry
-			> Client application must implement client side dicovery
-
-	> Service side discovery
-			. Client makes service requests via load balancer
-				> Load balancer routes requests to a service
-				> Load balancer uses a service registry database
-			. Load balancer uses service registry database
-				> Use to retrieve a location of an instance
-				> Location is registered on instance startup
-				> Location is deregistered if an innstance is removed
-				> Periodically check instance existence
-			. Advantage
-				> Removes seervices discovery logic from client
-			. Drawbacks
-				> Load balancer another component to manage  
-	> Service registration
-			. Self registration pattern
-			. Third-party registration pattern
-	> Registration and discovery tools
-			. Kubernetes
-			. Docker swarm
-			. Zookeeper
-			. Consul
-			. etc.		
+			> Load balancer another component to manage  
+> Service registration
+		. Self registration pattern
+		. Third-party registration pattern
+> Registration and discovery tools
+		. Kubernetes
+		. Docker swarm
+		. Zookeeper
+		. Consul
+		. etc.		
 
 
 ### Monitoring Microservices
