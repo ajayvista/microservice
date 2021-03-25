@@ -139,3 +139,40 @@ Generates a mini-dump of your application for later analysis.
 ### /cloudfoundry
 Enables integration with the Pivotal Applications Manager 
 
+
+# Self-Driven Data Centre Objectives
+
+## Structured Logging
+- What? (Log in key/values - ensure must be queryable)
+- Why? - (Must get reflected into micro-services analytics report)
+- Next ? (What is next step who see this log)
+- Aggregation/Trends - (using Agents/can be replicated into another system for further analysis)
+- Tools - (Helps in query and analysis issues, trends and charts)
+
+## Monitoring
+- Get rid of "pain of lift and shift" - Scoping core/shared functions
+- Realtime log and monitoring dashboard
+- SLA metrics and deviation dashboard
+- Alerting
+- Lost Connectivity
+- Lost Instances (pod restart)
+- Application Summary
+- Memory Leaks/Restart
+- Failed system (Corrupted system)
+
+## Integration
+
+- API/Event automation
+- Centralised configuration system/No local configuration
+- Mocking third party using stub
+- Fallback scenarios at every integration point
+- Integration with third party using adaptor service (Take all versioning and adaptability separately from business logic)
+
+## Pattern and Practices
+
+- Bulkhead pattern
+- Microservice Choreography 
+- Polling & Resilience
+- Raising valid exception rather exception to control business flow
+- Asynchronous Microservice (Decouples client and service using message broker)
+- Versioning Business Event
