@@ -1019,68 +1019,69 @@ This pattern provides at-least-once delivery guarantees.
 
 ### Monitoring Microservices
 
-	- Why the need to monitoring
-		-- Microservices complexity
-		-- High availability is a requirement
-	- Causes of microservices outages
-		-- Deployment Issues
-		-- Delayed and long repair
-		-- Downstream dependency issues
-	- Monitoring is the proactive solutionn
-		-- Know the state of all components
-		-- Know the state at eveery stage
-		-- Collect all statistics using metrics
-	- Monitor Key Metrics
-		-- Host and infrastrucres metrics => Monitoring Dashboard
-		-- State of hosts and infrastructure
-			(ammount of resourcee available or consumed, state of resource like 	CPU, bandwidth, memory , disk)
-		-- State affects microservices
-	- Monitor microservice metrics
-		-- Availability (health, response rate, average request/response/ success or failure of endpoints metrics)
-		-- Metrics around Errors, exception and timeouts
-		-- Endpoints exposing metrics data
-		-- Health of dependencies (metrics - central monitoring system of third party APIs)
-		-- Metrics at different stages
-	- Business Metrics
-		-- Hidden issues and failure
-		-- Sudden dip or change in end user behaviour=> must feed into metrics or dashboard
-		-- Business metrics/stats around business
-	- Monitor SLA metrics at all levels (Without them, you cannot know if your system is reliable, available or even useful)
-		- Service level (throguput and uptime)
-		- Service endpoint level (integration points)
-		- Concurrent clients
-		- Average response times
-		- Impact of dependencies on SLAs
-			- Monitor dependencies
-			- Actionable alerts to fix SLA issues		
-			- Communicate SLA issues early
-	- Monitoring Dashboards and Alerting 
-		- Display and collect metrics
-		- Real-time
-		- Centralized, accessible and standardized
-		- Good dashboard-help into decision, showing alert associated with the metrics, and same can be used for testing and monitoring lower enviorment. - would be used tp correlate mmetrics to events in the system.
-		- Bad dashboard - hard to interpret data
-		- Alert - if significant change in metrics, up or down or passed configured threshold.
-		- Alert - Configurable
-		- Actionable - alerting (avoid non-actionable alert, alert should not for information purpose, alert should link document or url to solve/helping this issue or next step, and metrics link of monitoring dashboard snf used for threashold configuration (historical data, use for performance testing and load testing, expected trafffic for normal thresholds or larger than expecte traffic) .. help engineer to resolve problem
-			- Normal state threshold
-			- Warning state threshold (prevent outages)
-			- Critical state threshold
-	- Worth reading SRE (site reliability engineering)
-		- Service-Level Objective (SLO)
-			- Prerequisite to success is availability
-			- Set a precise numerical target for system availability
-			- Every service should have an availability SLO
-			- Keep servers at the right availability level and move the load where its most needed
-		- Service-Level Agreement (SLA)
-			- An SLA normally involves a promise to someone using your service that its availability
-		- Service-Level Indicator (SLI)
-			- The frequency of successful probes of our system. 
-	- Monitoring Tools
-		. StatsD
-		. Graphite
-		. New Relic
-		. etc.
+**Why the need to monitoring**
+-- Microservices complexity
+-- High availability is a requirement
+**Causes of microservices outages**
+-- Deployment Issues
+-- Delayed and long repair
+-- Downstream dependency issues
+**Monitoring is the proactive solutionn**
+-- Know the state of all components
+-- Know the state at eveery stage
+-- Collect all statistics using metrics
+**Monitor Key Metrics**
+-- Host and infrastrucres metrics => Monitoring Dashboard
+-- State of hosts and infrastructure
+	(ammount of resourcee available or consumed, state of resource like 	CPU, bandwidth, memory , disk)
+-- State affects microservices
+**Monitor microservice metrics**
+-- Availability (health, response rate, average request/response/ success or failure of endpoints metrics)
+-- Metrics around Errors, exception and timeouts
+-- Endpoints exposing metrics data
+-- Health of dependencies (metrics - central monitoring system of third party APIs)
+-- Metrics at different stages
+**Business Metrics**
+-- Hidden issues and failure
+-- Sudden dip or change in end user behaviour=> must feed into metrics or dashboard
+-- Business metrics/stats around business
+- Monitor SLA metrics at all levels (Without them, you cannot know if your system is reliable, available or even useful)
+- Service level (throguput and uptime)
+- Service endpoint level (integration points)
+- Concurrent clients
+- Average response times
+- Impact of dependencies on SLAs
+	- Monitor dependencies
+	- Actionable alerts to fix SLA issues		
+	- Communicate SLA issues early
+- Monitoring Dashboards and Alerting 
+- Display and collect metrics
+- Real-time
+- Centralized, accessible and standardized
+- Good dashboard-help into decision, showing alert associated with the metrics, and same can be used for testing and monitoring lower enviorment. - would be used tp correlate mmetrics to events in the system.
+- Bad dashboard - hard to interpret data
+- Alert - if significant change in metrics, up or down or passed configured threshold.
+- Alert - Configurable
+- Actionable - alerting (avoid non-actionable alert, alert should not for information purpose, alert should link document or url to solve/helping this issue or next step, and metrics link of monitoring dashboard snf used for threashold configuration (historical data, use for performance testing and load testing, expected trafffic for normal thresholds or larger than expecte traffic) .. help engineer to resolve problem
+	- Normal state threshold
+	- Warning state threshold (prevent outages)
+	- Critical state threshold
+- Worth reading SRE (site reliability engineering)
+- Service-Level Objective (SLO)
+	- Prerequisite to success is availability
+	- Set a precise numerical target for system availability
+	- Every service should have an availability SLO
+	- Keep servers at the right availability level and move the load where its most needed
+- Service-Level Agreement (SLA)
+	- An SLA normally involves a promise to someone using your service that its availability
+- Service-Level Indicator (SLI)
+	- The frequency of successful probes of our system. 
+**Monitoring Tools**
+. StatsD
+. Graphite
+. New Relic
+. Jaeger https://www.youtube.com/watch?v=toXFRBtv4fg&ab_channel=DevMentors
+
 
 
 # Data Management Patterns for Microservices
@@ -1169,8 +1170,6 @@ Client Side: In this case, information is cached at client side and service has 
 Proxy Side: In this case, there is a proxy server between client and server that maintains the cache. It can be used to cache results for multiple services with less overhead.  
 
 Server Side: In this case, server provides caching with tools like Memcache or Redis. It is very opaque to clients. With multiple clients, this is the best strategy for caching.
-
-
 
 How will you implement Service Discovery in Microservices architecture? In Microservices architecture, there are multiple Microservices that provide APIs for different purposes. At times, it is difficult for a Developer to find whether an API already exists or not. If there is already an API provided by another another Microservice, then there is no need to rewrite it. Here comes the need for Service Discovery. Following are some ways to implement Service Discovery: 
 
