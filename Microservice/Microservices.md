@@ -413,8 +413,36 @@ Challenges
 		- Overlaping language in the boundry
 
 
-# How to architect Asynchronous Microservics
+# Microservics communication
 
+## Service Mesh
+
+Service Mesh is an inter-service communication infrastructure where all communications will take places on-top of a software component called service mesh (or side-car proxy).
+
+Most common features offered from a service mesh.
+
+- Resiliency for inter-service communications: Circuit-breaking, retries and timeouts, fault injection, fault handling, load balancing and failover.
+- Service Discovery: Discovery of service endpoints through a dedicated service registry.
+- Routing: Primitive routing capabilities, but no routing logics related to the business functionality of the service.
+- Observability: Metrics, monitoring, distributed logging, distributed tracing.
+- Security: Transport level security (TLS) and key management.
+- Access Control: Simple blacklist and whitelist based access control.
+- Deployment: Native support for containers. Docker and Kubernetes.
+- Interservice communication protocols: HTTP1.x, HTTP2, gRPC
+
+Pros
+
+Commodity features are implemented outside microservice code and they are reusable.
+Solves most of the problems in Microservices architecture which we used to have ad-hoc solutions: Distributed tracing, logging, security, access control etc.
+language agnostic
+
+Cons
+
+Complexity: Having a service mesh drastically increase the number of runtime instances that you have in a given microservice implementation.
+Adding extra hops: Each service call has to go through an extra hop(through service mesh sidecar proxy).
+
+
+# How to architect Asynchronous Microservics
 
 ## Event Based (Client <-.-> Message/Event Broker <-.-> Service)
 Event brokers enable an immutable, append-only log of facts that preserves the state of event ordering. The consumer can pick up and reprocess from anywhere in the log at any time. This pattern is essential for enabling event-driven microservices, but it is not available with message brokers.
