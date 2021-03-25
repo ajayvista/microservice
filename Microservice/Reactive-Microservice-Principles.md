@@ -140,7 +140,9 @@ Generates a mini-dump of your application for later analysis.
 Enables integration with the Pivotal Applications Manager 
 
 
+
 # Self-Driven Data Centre Objectives
+
 
 ## Structured Logging
 - What? (Log in key/values - ensure must be queryable)
